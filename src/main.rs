@@ -68,6 +68,7 @@ fn run_service(arguments: Vec<OsString>) -> windows_service::Result<()> {
 }
 
 fn main() -> Result<(), windows_service::Error> {
+    winlog::init(SERVICE_NAME).unwrap();
     // Register generated `ffi_service_main` with the system and start the service, blocking
     // this thread until the service is stopped.
     service_dispatcher::start(SERVICE_NAME, ffi_service_main)?;
