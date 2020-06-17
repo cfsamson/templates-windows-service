@@ -13,6 +13,15 @@ Change the `SERVICE_NAME` constant in the following files:
 - src/main.rs
 - Cargo.toml
 
+Take special note of the variables in `install.rs` and change them accordingly:
+
+```rust
+const SERVICE_NAME: &str = "MySchedulerService";
+const SERVICE_BINARY_PATH: &str = r"C:\dev\scheduler-service\target\debug\samson_scheduler.exe";
+const SERVICE_DISPLAY_NAME: &str = "My scheduler service";
+const SERVICE_START_TYPE: ServiceStartType = ServiceStartType::OnDemand;
+```
+
 ## Development
 
 The main entry point of the service is `app::app()`. Put the program logic entry point here. See
