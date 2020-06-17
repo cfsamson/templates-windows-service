@@ -11,7 +11,7 @@ const SERVICE_START_TYPE: ServiceStartType = ServiceStartType::OnDemand;
 // windows you're running on
 thread_local!{
     static SERVICE_BINARY_PATH: Lazy<String> = Lazy::new(|| {
-        let program_files = std::env::var("PROGRAMFILES(X86)").expect("Can't fine 'Program Files(x86) folder");
+        let program_files = std::env::var("PROGRAMFILES(X86)").expect("Can't find 'Program Files(x86)' folder");
         let exe_name = env!("CARGO_PKG_NAME");
         format!(r"{}\{}\{}.exe", program_files, SERVICE_NAME, exe_name)
     });
