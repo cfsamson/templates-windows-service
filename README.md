@@ -6,6 +6,12 @@ It registers a logger with the `winlog` crate to log messages to the Windows Eve
 
 ## How to get started
 
+Make sure you have Rust and InnoSetup Compiler installed. See Installer section below
+
+Clone the repository to a folder
+
+Change the name of the root folder to match your service name
+
 Change the `SERVICE_NAME` constant in the following files:
 
 - src/bin/install.rs
@@ -21,6 +27,26 @@ const SERVICE_BINARY_PATH: &str = r"C:\dev\scheduler-service\target\debug\schedu
 const SERVICE_DISPLAY_NAME: &str = "My scheduler service";
 const SERVICE_START_TYPE: ServiceStartType = ServiceStartType::OnDemand;
 ```
+
+Change the paths in `setup/installer.iss` to match your project path and build binaries
+
+Run `cargo build`
+
+Open `installer.iss` in InnoSetup and compile the installer
+
+Get the installer from the output dir specified in `installer.iss`
+
+Run the installer on the system you want to install the service on
+
+Uninstall using Add/Remove programs if needed
+
+### Some tips
+
+The service will not actually get uninstalled if you keep the service manager window open. Close it
+and reopen for it to be removed (or don't keep it open when you uninstall the service)
+
+Installing while having Event Viewer open can cause problems since we're registering our log
+when installing.
 
 ## Development
 

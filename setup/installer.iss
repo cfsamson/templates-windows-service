@@ -15,7 +15,7 @@ AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
-CreateAppDir=no
+CreateAppDir=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=C:\dev\rust\scheduler-service\target\debug
@@ -23,6 +23,9 @@ OutputBaseFilename={#ExeName}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
+; Don't allow the user to choose installation folder. For the install binary to point to the
+; right service binary "automatically" we need to disable this.
+DisableDirPage=yes
 
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
@@ -34,7 +37,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Files]
 Source: "C:\dev\rust\scheduler-service\target\debug\install.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\dev\rust\scheduler-service\target\debug\uninstall.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\dev\rust\scheduler-service\target\debug\samson_scheduler.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\dev\rust\scheduler-service\target\debug\scheduler_service.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [run]
