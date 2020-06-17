@@ -1,7 +1,8 @@
 use windows_service::service::{ServiceStartType};
 
 const SERVICE_NAME: &str = "MySchedulerService";
-const SERVICE_BINARY_PATH: &str = r"C:\dev\scheduler-service\target\debug\samson_scheduler.exe";
+/// Points to the 
+const SERVICE_BINARY_PATH: &str = r"C:\dev\scheduler-service\target\debug\scheduler_service.exe";
 const SERVICE_DISPLAY_NAME: &str = "My scheduler service";
 const SERVICE_START_TYPE: ServiceStartType = ServiceStartType::OnDemand;
 

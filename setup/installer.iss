@@ -18,19 +18,23 @@ AppPublisher={#MyAppPublisher}
 CreateAppDir=no
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir=C:\\dev\rust\scheduler-service\target\debug
+OutputDir=C:\dev\rust\scheduler-service\target\debug
 OutputBaseFilename={#ExeName}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 
+DefaultDirName={autopf}\{#MyAppName}
+DefaultGroupName={#MyAppName}
+DisableProgramGroupPage=yes
+
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "C:\dev\rust\scheduler-service\target\debug\install.exe"; DestDir: "{win}"; Flags: ignoreversion
-Source: "C:\dev\rust\scheduler-service\target\debug\uninstall.exe"; DestDir: "{win}"; Flags: ignoreversion
-Source: "C:\dev\rust\scheduler-service\target\debug\samson_scheduler.exe"; DestDir: "{win}"; Flags: ignoreversion
+Source: "C:\dev\rust\scheduler-service\target\debug\install.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\dev\rust\scheduler-service\target\debug\uninstall.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\dev\rust\scheduler-service\target\debug\samson_scheduler.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [run]
