@@ -4,7 +4,7 @@
 #define MyAppName "MySchedulerService"
 #define MyAppVersion "0.0.1"
 #define MyAppPublisher "MyCompany"
-#define MyAppExeName "SamsonSchedulerInstaller.exe"
+#define MyAppExeName "MySchedulerInstaller.exe"
 #define ExeName "scheduler_service_installer"
 
 [Setup]
