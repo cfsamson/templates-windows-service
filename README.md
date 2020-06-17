@@ -28,3 +28,8 @@ Open the Compiler and locate the file located in `setup/installer.iss`
 Change the variables and paths accordingly (the example assumes a project path `C:\dev\rust\scheduler-service\`)
 
 Compile the installer.
+
+## Additional notes
+
+See https://github.com/mullvad/windows-service-rs/issues/43 for the reason we build `windows-service`
+from the github repo's master branch and not using the published crate.
