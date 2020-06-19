@@ -28,7 +28,7 @@ fn run_service(arguments: Vec<OsString>) -> windows_service::Result<()> {
     };
 
     // Register system service event handler
-    let status_handle = service_control_handler::register("my_service_name", event_handler)?;
+    let status_handle = service_control_handler::register(SERVICE_NAME, event_handler)?;
 
     let next_status = ServiceStatus {
         // Should match the one from system service registry
@@ -51,7 +51,6 @@ fn run_service(arguments: Vec<OsString>) -> windows_service::Result<()> {
 
     // Do some work
     app::app();
-    println!("HERE");
 
      // Tell the system that service has stopped.
      status_handle.set_service_status(ServiceStatus {

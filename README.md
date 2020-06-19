@@ -23,12 +23,12 @@ Take special note of the variables in `install.rs` and change them accordingly:
 
 ```rust
 const SERVICE_NAME: &str = "MySchedulerService";
-const SERVICE_BINARY_PATH: &str = r"C:\dev\scheduler-service\target\debug\scheduler_service.exe";
 const SERVICE_DISPLAY_NAME: &str = "My scheduler service";
 const SERVICE_START_TYPE: ServiceStartType = ServiceStartType::OnDemand;
 ```
 
-Change the paths in `setup/installer.iss` to match your project path and build binaries
+Change the paths in `setup/installer.iss` to match your project path and build binaries, you should
+only need to edit the top level variables, including the `Profile` variable to match your build profile.
 
 Run `cargo build`
 

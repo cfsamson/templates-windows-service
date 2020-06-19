@@ -1,6 +1,6 @@
-use windows_service::service::ServiceStartType;
 use once_cell::unsync::Lazy;
-use std::{thread, time::Duration};
+use std::path::PathBuf;
+use windows_service::service::ServiceStartType;
 
 const SERVICE_NAME: &str = "MySchedulerService";
 const SERVICE_DISPLAY_NAME: &str = "My scheduler service";
@@ -9,11 +9,13 @@ const SERVICE_START_TYPE: ServiceStartType = ServiceStartType::OnDemand;
 // Points to the path where InnoSetup places our binary files, if this doesn't work either
 // fill in the value manually or look up the env_var for Program Files(x86) on the version of
 // windows you're running on
-thread_local!{
-    static SERVICE_BINARY_PATH: Lazy<String> = Lazy::new(|| {
-        let program_files = std::env::var("PROGRAMFILES(X86)").expect("Can't find 'Program Files(x86)' folder");
-        let exe_name = env!("CARGO_PKG_NAME");
-        format!(r"{}\{}\{}.exe", program_files, SERVICE_NAME, exe_name)
+thread_local! {
+    static SERVICE_BINARY_PATH: Lazy<PathBuf> = Lazy::new(|| {
+        let mut prog_folder = std::env::current_exe().unwrap();
+        prog_folder.pop();
+        prog_folder.push(env!("CARGO_PKG_NAME"));
+        prog_folder.set_extension("exe");
+        prog_folder
     });
 }
 
@@ -32,9 +34,7 @@ fn main() -> windows_service::Result<()> {
     let service_manager = ServiceManager::local_computer(None::<&str>, manager_access)?;
 
     // The path to the service binary to install
-    let sbp = SERVICE_BINARY_PATH.with(|sbp| (*sbp).clone());
-    let service_binary_path = std::path::PathBuf::from(sbp);
-
+    let service_binary_path = SERVICE_BINARY_PATH.with(|sbp| (*sbp).clone());
     let service_info = ServiceInfo {
         name: OsString::from(SERVICE_NAME),
         display_name: OsString::from(SERVICE_DISPLAY_NAME),
@@ -61,5 +61,5 @@ fn main() {
 #[test]
 fn exe_dir() {
     let sbp = SERVICE_BINARY_PATH.with(|sbp| (*sbp).clone());
-    println!("{}", sbp);
+    println!("{}", sbp.to_string_lossy());
 }

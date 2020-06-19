@@ -5,7 +5,10 @@
 #define MyAppVersion "0.0.1"
 #define MyAppPublisher "MyCompany"
 #define MyAppExeName "MySchedulerInstaller.exe"
+
 #define ExeName "scheduler_service_installer"
+#define ProjectPath "C:\dev\rust\scheduler-service"
+#define Profile "release"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -18,14 +21,14 @@ AppPublisher={#MyAppPublisher}
 CreateAppDir=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir=C:\dev\rust\scheduler-service\target\debug
+OutputDir={#ProjectPath}\target\{#Profile}
 OutputBaseFilename={#ExeName}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 ; Don't allow the user to choose installation folder. For the install binary to point to the
 ; right service binary "automatically" we need to disable this.
-DisableDirPage=yes
+; DisableDirPage=yes
 
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
@@ -35,9 +38,9 @@ DisableProgramGroupPage=yes
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "C:\dev\rust\scheduler-service\target\debug\install.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\dev\rust\scheduler-service\target\debug\uninstall.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\dev\rust\scheduler-service\target\debug\scheduler_service.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: {#ProjectPath}\target\{#Profile}\install.exe; DestDir: "{app}"; Flags: ignoreversion
+Source: {#ProjectPath}\target\{#Profile}\uninstall.exe; DestDir: "{app}"; Flags: ignoreversion
+Source: {#ProjectPath}\target\{#Profile}\scheduler_service.exe; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [run]
